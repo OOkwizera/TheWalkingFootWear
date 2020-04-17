@@ -23,7 +23,7 @@ public class EmployeeService {
 		return emps;
 	}
 	
-	public Employee getEmployeeById(int id) {
+	public Employee getEmployeeById(long id) {
 		Optional<Employee> e = empRepo.findById(id);
 		if (e.isPresent()) {
 			return e.get();
@@ -31,7 +31,7 @@ public class EmployeeService {
 		return null;
 	}
 	
-	public void deleteEmployeeById(int id) {
+	public void deleteEmployeeById(long id) {
 		empRepo.deleteById(id);
 	}
 	

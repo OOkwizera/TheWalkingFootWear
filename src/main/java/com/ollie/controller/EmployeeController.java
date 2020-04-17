@@ -28,17 +28,17 @@ public class EmployeeController {
 	}
 	
 	@GetMapping("/employee/{empId}")
-	public Employee getEmployeeById(@PathVariable("empId") int empId) {
+	public Employee getEmployeeById(@PathVariable("empId") long empId) {
 		return empService.getEmployeeById(empId);
 	}
 	
 	@DeleteMapping("/employee/{empId}")
-	public void deleteEmployeeById(@PathVariable("empId") int empId) {
+	public void deleteEmployeeById(@PathVariable("empId") long empId) {
 		empService.deleteEmployeeById(empId);
 	}
 	
 	@PostMapping("/employee") 
-	public int saveEmployee(@RequestBody Employee emp){
+	public long saveEmployee(@RequestBody Employee emp){
 		empService.saveOrUpdate(emp);
 		return emp.getEmpId();
 	}

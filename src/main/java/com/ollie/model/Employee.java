@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -11,28 +13,30 @@ import javax.persistence.Table;
 public class Employee {
 	
 	@Id
-	private int empId;
+	private long empId;
 	private String firstName;
 	private String lastName;
 	private double salary;
 	@Enumerated(EnumType.STRING)
 	private EmployeeType type;
-	
-	
+//	@ManyToOne
+//	@JoinColumn(name="shop_id")
+//	private Shop shop;
+//	
 	public Employee() {}
 
+//	public Employee(long empId, String firstName, String lastName, double salary, EmployeeType type, Shop shop) {
+//		super();
+//		this.empId = empId;
+//		this.firstName = firstName;
+//		this.lastName = lastName;
+//		this.salary = salary;
+//		this.type = type;
+//		this.shop = shop;
+//	}
 
-	public Employee(int empId, String firstName, String lastName, double salary, EmployeeType type) {
-		super();
-		this.empId = empId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.salary = salary;
-		this.type = type;
-	}
 
-
-	public int getEmpId() {
+	public long getEmpId() {
 		return empId;
 	}
 
@@ -81,6 +85,15 @@ public class Employee {
 		this.type = type;
 	}
 	
+//	public Shop getShop() {
+//		return shop;
+//	}
+//
+//	public void setShop(Shop shop) {
+//		this.shop = shop;
+//	}
+
+
 	
 
 }
