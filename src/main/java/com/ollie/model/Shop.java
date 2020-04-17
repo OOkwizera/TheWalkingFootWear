@@ -26,8 +26,8 @@ public class Shop {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	private String name;
-//	@OneToMany(mappedBy="shop")
-//	private List<Employee> employees;
+	@OneToMany(mappedBy="shop")
+	private List<Employee> employees;
 //	@ManyToMany(cascade = CascadeType.ALL)
 //	@JoinTable(name = "products_shops", 
 //	    joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"), 
@@ -68,14 +68,14 @@ public class Shop {
 	}
 
 
-//	public List<Employee> getEmployees() {
-//		return employees;
-//	}
-//
-//
-//	public void setEmployees(List<Employee> employees) {
-//		this.employees = employees;
-//	}
+	public List<Employee> getEmployees() {
+		return employees;
+	}
+
+
+	public void setEmployees(List<Employee> employees) {
+		this.employees = employees;
+	}
 //
 //
 //	public List<Product> getInventory() {

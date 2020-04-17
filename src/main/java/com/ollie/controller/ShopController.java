@@ -20,7 +20,7 @@ import com.ollie.service.ShopService;
 public class ShopController {
 	
 	@Autowired
-	ShopService service;
+	private ShopService service;
 	
 	@GetMapping("/allShops")
 	public List<Shop> getAllShops() {

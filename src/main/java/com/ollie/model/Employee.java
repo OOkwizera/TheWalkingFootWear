@@ -19,9 +19,9 @@ public class Employee {
 	private double salary;
 	@Enumerated(EnumType.STRING)
 	private EmployeeType type;
-//	@ManyToOne
-//	@JoinColumn(name="shop_id")
-//	private Shop shop;
+	@ManyToOne
+	@JoinColumn(name="shop_id")
+	private Shop shop;
 //	
 	public Employee() {}
 
@@ -85,13 +85,13 @@ public class Employee {
 		this.type = type;
 	}
 	
-//	public Shop getShop() {
-//		return shop;
-//	}
-//
-//	public void setShop(Shop shop) {
-//		this.shop = shop;
-//	}
+	public Shop getShop() {
+		return shop;
+	}
+
+	public void setShop(Shop shop) {
+		this.shop = shop;
+	}
 
 
 	
