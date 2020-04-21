@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ollie.model.Employee;
+import com.ollie.model.Shop;
 import com.ollie.service.EmployeeService;
 
 @RestController
@@ -32,6 +33,11 @@ public class EmployeeController {
 		return empService.getEmployeeById(empId);
 	}
 	
+	@GetMapping("/employee/{empId}/shop")
+	public Shop getShopByEmployeeId(@PathVariable("empId") long empId) {
+		return empService.getShopByEmployeeId(empId);
+	}
+	
 	@DeleteMapping("/employee/{empId}")
 	public void deleteEmployeeById(@PathVariable("empId") long empId) {
 		empService.deleteEmployeeById(empId);
@@ -47,5 +53,13 @@ public class EmployeeController {
 	public void updateEmployee(@RequestBody Employee emp){
 		empService.saveOrUpdate(emp);
 	}
+	
+	
+	@PutMapping("/employee/{empId}")
+	public long updateEmployee(@PathVariable("empId") long empId, @RequestBody Shop shop){
+		return empService.setShop(empId, shop);
+	}
+	
+	
 
 }

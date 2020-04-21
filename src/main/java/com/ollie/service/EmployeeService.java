@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ollie.model.Employee;
+import com.ollie.model.Shop;
 import com.ollie.repo.EmployeeRepo;
 
 @Service
@@ -37,6 +38,25 @@ public class EmployeeService {
 	
 	public void saveOrUpdate(Employee e) {
 		empRepo.save(e);
+	}
+	
+	public Shop getShopByEmployeeId(long id) {
+		Optional<Employee> e = empRepo.findById(id);
+		if (e.isPresent()) {
+			return e.get().getShop();
+		}
+		return null;
+	}
+	
+	public long setShop(long id, Shop shop) {
+		Optional<Employee> e = empRepo.findById(id);
+		if (e.isPresent()) {
+			Employee emp = e.get();
+			emp.setShop(shop);
+			empRepo.save(emp);
+			return emp.getShop().getId();
+		}
+		return 0;
 	}
 
 }

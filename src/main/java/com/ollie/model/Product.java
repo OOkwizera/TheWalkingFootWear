@@ -1,34 +1,41 @@
 package com.ollie.model;
 
-import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 
 @Entity
 @Table(name="products")
 public class Product {
 	
-	@Id 
+	@Id
+	@Column(name="product_id")
 	private long id;
 	private String name;
 	private String description;
 	private double price;
-//	@ManyToMany(mappedBy="inventory")
-//	private List<Shop> shops;
-//	
-	public Product() {}
+	@JsonBackReference
+	@ManyToOne
+	@JoinColumn(name="shop_id")
+	private Shop shop;
+	
+	public Product() {
+	}
 
-//	public Product(long prodId, String name, String description, double price, List<Shop> shops) {
-//		super();
-//		this.id = prodId;
-//		this.name = name;
-//		this.description = description;
-//		this.price = price;
-//		this.shops = shops;
-//	}
+	public Product(long prodId, String name, String description, double price, Shop shop) {
+		super();
+		this.id = prodId;
+		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.shop = shop;
+	}
 
 
 
@@ -63,14 +70,17 @@ public class Product {
 	public void setPrice(double price) {
 		this.price = price;
 	}
+
+	public Shop getShop() {
+		return shop;
+	}
+
+	public void setShop(Shop shop) {
+		this.shop = shop;
+	}
+
 	
-//	public List<Shop> getShop() {
-//	return shops;
-//}
-//
-//public void setShop(List<Shop> shop) {
-//	this.shops = shop;
-//}
+	
 
 	
 }

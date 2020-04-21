@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ollie.model.Product;
+import com.ollie.model.Shop;
 import com.ollie.service.ProductService;
 
 @RestController
@@ -20,7 +21,7 @@ import com.ollie.service.ProductService;
 public class ProductController {
 	
 	@Autowired
-	ProductService service;
+	private ProductService service;
 	
 	@GetMapping("/allProducts")
 	public List<Product> getAllProducts(){
@@ -30,6 +31,11 @@ public class ProductController {
 	@GetMapping("/product/{id}")
 	public Product getProductById(@PathVariable("id") long id) {
 		return service.getProductById(id);
+	}
+	
+	@GetMapping("/product/{id}/shop")
+	public Shop getShopByProductId(@PathVariable("id") long id) {
+		return service.getShopByProductId(id);
 	}
 	
 	@DeleteMapping("/product/{id}")
@@ -46,6 +52,11 @@ public class ProductController {
 	@PutMapping("/product")
 	public void updateProduct(@RequestBody Product p) {
 		service.saveProduct(p);
+	}
+	
+	@PutMapping("/product/{prodId}")
+	public long updateProduct(@PathVariable("prodId") long prodId, @RequestBody Shop shop){
+		return service.setShop(prodId, shop);
 	}
 	
 

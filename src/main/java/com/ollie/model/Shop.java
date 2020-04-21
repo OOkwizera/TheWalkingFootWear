@@ -3,20 +3,21 @@ package com.ollie.model;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.JoinColumn;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.ollie.model.Product;
-
-
 
 @Entity
 @Table(name="shops")
@@ -24,39 +25,38 @@ public class Shop {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="shop_id")
 	private long id;
 	private String name;
-	@OneToMany(mappedBy="shop")
+	@JsonManagedReference
+	@OneToMany(mappedBy="shop", cascade = CascadeType.ALL)
 	private List<Employee> employees;
-//	@ManyToMany(cascade = CascadeType.ALL)
-//	@JoinTable(name = "products_shops", 
-//	    joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"), 
-//	    inverseJoinColumns = @JoinColumn(name = "shop_id", 
-//	    referencedColumnName = "id"))
-//	private List<Product> inventory;
+	@JsonManagedReference
+	@OneToMany(mappedBy="shop", cascade = CascadeType.ALL)
+	private Set<Product> inventory;
 	
 	
 	public Shop() {}
 
 
-//	public Shop(long id, String name, List<Employee> employees, List<Product> inventory) {
-//		super();
-//		this.id = id;
-//		this.name = name;
-//		this.employees = employees;
-//		this.inventory = inventory;
-//	}
-
-
-	public long getShopID() {
+	public long getId() {
 		return id;
 	}
 
 
-	public void setShopID(long shopID) {
-		this.id = shopID;
+	public void setId(long id) {
+		this.id = id;
 	}
 
+
+	public Shop(long id, String name, List<Employee> employees, Set<Product> inventory) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.employees = employees;
+		this.inventory = inventory;
+		
+	}
 
 	public String getName() {
 		return name;
@@ -76,16 +76,23 @@ public class Shop {
 	public void setEmployees(List<Employee> employees) {
 		this.employees = employees;
 	}
-//
-//
-//	public List<Product> getInventory() {
-//		return inventory;
-//	}
-//
-//
-//	public void setInventory(List<Product> inventory) {
-//		this.inventory = inventory;
-//	}
+
+	public Set<Product> getInventory() {
+		return inventory;
+	}
+
+
+	public void setInventory(Set<Product> inventory) {
+		this.inventory = inventory;
+	}
+	
+	public void addProduct(Product p) {
+		this.inventory.add(p);
+	}
+	
+	public void addEmployee(Employee e) {
+		this.employees.add(e);
+	}
 	
 	
 	

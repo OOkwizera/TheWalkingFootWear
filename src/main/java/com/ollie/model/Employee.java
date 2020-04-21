@@ -8,6 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name="employees")
 public class Employee {
@@ -19,21 +21,22 @@ public class Employee {
 	private double salary;
 	@Enumerated(EnumType.STRING)
 	private EmployeeType type;
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="shop_id")
 	private Shop shop;
 //	
 	public Employee() {}
 
-//	public Employee(long empId, String firstName, String lastName, double salary, EmployeeType type, Shop shop) {
-//		super();
-//		this.empId = empId;
-//		this.firstName = firstName;
-//		this.lastName = lastName;
-//		this.salary = salary;
-//		this.type = type;
-//		this.shop = shop;
-//	}
+	public Employee(long empId, String firstName, String lastName, double salary, EmployeeType type, Shop shop) {
+		super();
+		this.empId = empId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.salary = salary;
+		this.type = type;
+		this.shop = shop;
+	}
 
 
 	public long getEmpId() {
